@@ -1,0 +1,13 @@
+{
+    "mettware-plugin": {
+        "general": {
+            "mainMenuItemGeneral": "Mettware",
+            "descriptionTextModule": "Mettbestellungen für den Tag wieder frei geben"
+        },
+        "detail":{
+            "openOrders": "Bestellungen freigeben",
+            "ordersOpened": "Bestellungen wurden erfolgreich freigegeben!",
+            "error": "Es ist ein Fehler aufgetreten!"
+        }
+    }
+}

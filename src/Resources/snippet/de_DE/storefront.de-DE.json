@@ -1,0 +1,29 @@
+{
+    "mettware": {
+        "orders": {
+            "stopped": "Bestellungen gestoppt!",
+            "stop": "Bestellung stoppen"
+        },
+        "list": {
+            "orderNumber": "Bestellnummer",
+            "name": "Name",
+            "order": "Bestellung",
+            "count": "Anzahl",
+            "price": "Preis"
+        },
+        "summary": {
+            "count": "Anzahl",
+            "totalCount": "Gesamtanzahl",
+            "total": "Gesamtsumme"
+        },
+        "order": {
+            "overview": "Bestellübersicht"
+        }
+    },
+    "checkout": {
+        "mettware-order-stopped": "Bestellung für heute bereits geschlossen"
+    },
+    "error": {
+        "mettware-order-stopped": "Bestellung für heute bereits geschlossen"
+    }
+}

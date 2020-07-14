@@ -1,0 +1,29 @@
+{
+    "mettware": {
+        "orders": {
+            "stopped": "Orders stopped!",
+            "stop": "Stop Orders"
+        },
+        "list": {
+            "orderNumber": "Order number",
+            "name": "Name",
+            "order": "Order",
+            "count": "Count",
+            "price": "Price"
+        },
+        "summary": {
+            "count": "Count",
+            "totalCount": "Total count",
+            "total": "Total"
+        },
+        "order": {
+            "overview": "Order Overview"
+        }
+    },
+    "checkout": {
+        "mettware-order-stopped": "Order for today already closed"
+    },
+    "error": {
+        "mettware-order-stopped": "Order for today already closed"
+    }
+}

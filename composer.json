@@ -1,0 +1,30 @@
+{
+    "name": "hoelshare/mettware",
+    "description": "Mettware Plugin",
+    "type": "shopware-platform-plugin",
+    "version": "v0.0.1",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sebastian Hölscher",
+            "role": "Manufacturer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Mettware\\": "src/"
+        }
+    },
+    "extra": {
+        "plugin-icon": "src/Resources/config/icon.png",
+        "shopware-plugin-class": "Mettware\\Mettware",
+        "label": {
+            "de-DE": "Mettware Plugin",
+            "en-GB": "Mettware Plugin"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://hoelshare.com",
+            "en-GB": "https://hoelshare.com"
+        }
+    }
+}

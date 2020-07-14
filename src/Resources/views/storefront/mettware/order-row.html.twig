@@ -1,0 +1,29 @@
+<tr>
+    <th scope="row" rowspan="{{ order.lineItems|length }}">{{ number }}</th>
+    <th scope="row" rowspan="{{ order.lineItems|length }}">{{ order.orderNumber }}</th>
+    <td rowspan="{{ order.lineItems|length }}">
+        {{ order.orderCustomer.firstName }} {{ order.orderCustomer.lastName }}
+    </td>
+    {% for id, orderItem in order.lineItems %}
+        {% if loop.first == False %}
+            <tr>
+        {% endif %}
+        <td>
+            {{ orderItem.product.name }}
+        </td>
+        <td>
+            {{ orderItem.quantity }}
+        </td>
+        <td>
+            {{ orderItem.totalPrice|currency }}
+        </td>
+        {% if loop.first %}
+            <td rowspan="{{ order.lineItems|length }}">
+                {{ order.amountTotal|currency }}
+            </td>
+        {% endif %}
+        {% if loop.last == False %}
+            </tr>
+        {% endif %}
+    {% endfor %}
+</tr>

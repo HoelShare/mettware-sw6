@@ -1,0 +1,9 @@
+{% sw_extends '@Storefront/storefront/layout/header/top-bar.html.twig' %}
+
+{% block layout_header_top_bar_language %}
+    <div class="top-bar-nav-item">
+        <a href="{{ path("frontend.mettware.order") }}">{{ 'mettware.order.overview'|trans }}</a>
+    </div>
+
+    {{ parent() }}
+{% endblock %}
