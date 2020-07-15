@@ -1,7 +1,7 @@
 import ApiService from 'src/core/service/api.service';
 
 class MwOrderApiService extends ApiService {
-    constructor(httpClient, loginService, apiEndpoint = 'mwOrder') {
+    constructor(httpClient, loginService, apiEndpoint = 'mettware') {
         super(httpClient, loginService, apiEndpoint);
     }
 
@@ -10,7 +10,7 @@ class MwOrderApiService extends ApiService {
     }
 
     openOrders() {
-        const route = `_action/mettware/free`;
+        const route = `_action/${this.getApiBasePath()}/free`;
         const headers = this.getBasicHeaders();
 
         return this.httpClient
@@ -24,5 +24,3 @@ Shopware.Application.addServiceProvider(MwOrderApiService.name, (container) => {
     const initContainer = Shopware.Application.getContainer('init');
     return new MwOrderApiService(initContainer.httpClient, container.loginService);
 })
-
-export default MwOrderApiService;

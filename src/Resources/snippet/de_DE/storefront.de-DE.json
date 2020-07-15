@@ -2,7 +2,7 @@
     "mettware": {
         "orders": {
             "stopped": "Bestellungen gestoppt!",
-            "stop": "Bestellung stoppen"
+            "stop": "Bestellung stoppen",
         },
         "list": {
             "orderNumber": "Bestellnummer",

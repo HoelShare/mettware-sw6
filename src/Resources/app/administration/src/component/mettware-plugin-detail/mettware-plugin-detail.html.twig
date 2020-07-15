@@ -1,14 +1,8 @@
-<sw-page class="mettware-plugin-details">
-    <template #content>
-        <sw-card>
-            <div v-if="ok != null">
-                <template v-if="ok">{{ $tc('mettware-plugin.detail.ordersOpened') }}</template>
-                <template v-else>{{ $tc('mettware-plugin.detail.error') }}</template>
-            </div>
-            <sw-button variant="primary"
-                       @click.prevent="onOpenOrders">
-                {{ $tc('mettware-plugin.detail.openOrders') }}
-            </sw-button>
-        </sw-card>
-    </template>
-</sw-page>
+<div>
+    <sw-button-process
+        :isLoading="isLoading"
+        :processSuccess="isResetSuccessful"
+        @process-finish="resetFinish"
+        @click="onOpenOrders"
+    >{{ label }}</sw-button-process>
+</div>

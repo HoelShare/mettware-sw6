@@ -1,22 +1,45 @@
+const { Component, Mixin } = Shopware;
 import template from './mettware-plugin-detail.html.twig';
 
-Shopware.Component.register('mettware-plugin-detail', {
-    inject: [
-        'mwOrderService'
-    ],
-
+Component.register('mettware-plugin-detail', {
     template,
+
+    props: ['label'],
+    inject: ['mwOrderService'],
+
+    mixins: [
+        Mixin.getByName('notification')
+    ],
 
     data() {
         return {
-            ok: null
+            isLoading: false,
+            isResetSuccessful: false,
         };
     },
 
     methods: {
+        resetFinish() {
+            this.isResetSuccessful = false;
+        },
+
         onOpenOrders() {
+            this.isLoading = true;
             this.mwOrderService.openOrders().then((result) => {
-                this.ok = result.data.ok;
+                if (result.data.ok) {
+                    this.isResetSuccessful = true;
+                    this.createNotificationSuccess({
+                        title: this.$tc('mettware-plugin.detail.title'),
+                        message: this.$tc('mettware-plugin.detail.ordersOpened')
+                    });
+                } else {
+                    this.createNotificationError({
+                        title: this.$tc('mettware-plugin.detail.title'),
+                        message: this.$tc('mettware-plugin.detail.error')
+                    })
+                }
+
+                this.isLoading = false;
             });
         }
     }

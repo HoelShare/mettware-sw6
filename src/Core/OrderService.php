@@ -9,7 +9,6 @@ use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\RangeFilter;
 use Shopware\Core\Framework\Uuid\Uuid;
-use Shopware\Core\System\SalesChannel\SalesChannelContext;
 
 class OrderService
 {
@@ -47,7 +46,7 @@ class OrderService
             return;
         }
 
-        $this->mettwareOrderRepository->delete([$id], $context);
+        $this->mettwareOrderRepository->delete([['id' => $id]], $context);
     }
 
     private function getTodayOrderId(Context $context): ?string

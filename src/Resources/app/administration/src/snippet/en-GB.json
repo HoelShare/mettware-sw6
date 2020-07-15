@@ -1,10 +1,7 @@
 {
     "mettware-plugin": {
-        "general": {
-            "mainMenuItemGeneral": "Mettware",
-            "descriptionTextModule": "Mettbestellungen für den Tag wieder frei geben"
-        },
         "detail":{
+            "title": "Mettware",
             "openOrders": "Open Orders",
             "ordersOpened": "Orders successfully opened",
             "error": "Ups, an error occurred"

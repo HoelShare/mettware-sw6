@@ -49,14 +49,14 @@
                             {{ 'mettware.summary.total'|trans }}: {{ orders.aggregations.get('sum').sum|currency }}
                         </div>
                     </div>
-                    <div class="col-3 message-wrapper">
-                        <button type="button" class="btn btn-danger stop-button">{{ 'mettware.orders.stop'|trans }}</button>
-                    </div>
+                    {% if isStopped == False %}
+                        <div class="col-3 message-wrapper">
+                            <button type="button"
+                                    class="btn btn-danger stop-button">{{ 'mettware.orders.stop'|trans }}</button>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
-        {% if isStopped == False %}
-
-        {% endif %}
     </div>
 {% endblock %}
