@@ -6,13 +6,16 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Mettware\Core\OrderService;
 use ONGR\ElasticsearchDSL\Aggregation\Bucketing\FilterAggregation;
 use Shopware\B2B\Statistic\Framework\StatisticAggregate;
+use Shopware\Core\Checkout\Order\OrderCollection;
 use Shopware\Core\Checkout\Order\OrderDefinition;
+use Shopware\Core\Content\Product\ProductEntity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Aggregation\Bucket\TermsAggregation;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Aggregation\Metric\CountAggregation;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Aggregation\Metric\MaxAggregation;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Aggregation\Metric\StatsAggregation;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Aggregation\Metric\SumAggregation;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\AggregationResult\Bucket\TermsResult;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\RangeFilter;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\RequestCriteriaBuilder;
@@ -82,9 +85,11 @@ class OrderRoute
             RangeFilter::LTE => $endOfDay->format('Y-m-d H:i:s'),
         ]));
         $criteria->addAssociation('lineItems.product');
+        $criteria->addAssociation('lineItems.product.manufacturer');
+        $criteria->addAssociation('lineItems.product.options');
         $criteria->addAssociation('customer');
 
-        $criteria->addAggregation(new TermsAggregation('count', 'order.lineItems.product.name', null, new FieldSorting('order.lineItems.product.name'), new SumAggregation('quantity', 'order.lineItems.quantity')));
+        $criteria->addAggregation(new TermsAggregation('count', 'order.lineItems.product.id', null, new FieldSorting('order.lineItems.product.name'), new SumAggregation('quantity', 'order.lineItems.quantity')));
         $criteria->addAggregation(new SumAggregation('sum', 'amountTotal'));
         $criteria->addAggregation(new SumAggregation('total-count', 'order.lineItems.quantity'));
 
@@ -92,9 +97,34 @@ class OrderRoute
 
         $orders = $this->orderRepository->search($criteria, $context->getContext());
 
+        /** @var TermsResult $terms */
+        $terms = $orders->getAggregations()->get('count');
+
+        foreach ($terms->getBuckets() as $bucket) {
+            $product = $this->findProductById($orders->getEntities(), $bucket->getKey());
+            if (!$product) {
+                continue;
+            }
+
+            $bucket->addExtension('name', new ProductNameStruct($product));
+        }
+
         $isStopped = $this->orderService->isStopped($context->getContext());
 
         return new OrderRouteResponse($orders, $isStopped);
+    }
+
+    private function findProductById(OrderCollection $orders, string $productId): ?ProductEntity
+    {
+        foreach ($orders as $order) {
+            foreach ($order->getLineItems() as $lineItem) {
+                if ($lineItem->getProductId() === $productId) {
+                    return $lineItem->getProduct();
+                }
+            }
+        }
+
+        return null;
     }
 
     /**

@@ -17,6 +17,7 @@
                 <th scope="col">{{ 'mettware.list.orderNumber'|trans }}</th>
                 <th scope="col">{{ 'mettware.list.name'|trans }}</th>
                 <th scope="col">{{ 'mettware.list.order'|trans }}</th>
+                <th scope="col">{{ 'mettware.list.manufacturer'|trans }}</th>
                 <th scope="col">{{ 'mettware.list.count'|trans }}</th>
                 <th scope="col" colspan="2">{{ 'mettware.list.price'|trans }}</th>
             </tr>
@@ -35,7 +36,7 @@
             <ul class="list-group list-group-flush">
                 {% for countAggregate in orders.aggregations.get('count').buckets %}
                     <li class="list-group-item">
-                        {{ 'mettware.summary.count'|trans }}: {{ countAggregate.result.sum }}x {{ countAggregate.key }}
+                        {{ 'mettware.summary.count'|trans }}: {{ countAggregate.result.sum }}x {{ countAggregate.extensions.name.name }}
                     </li>
                 {% endfor %}
             </ul>

@@ -5,11 +5,26 @@
         {{ order.orderCustomer.firstName }} {{ order.orderCustomer.lastName }}
     </td>
     {% for id, orderItem in order.lineItems %}
-        {% if loop.first == False %}
+        {% if loop.first == false %}
             <tr>
         {% endif %}
         <td>
-            {{ orderItem.product.name }}
+            {{ orderItem.product.translated.name }}
+            {% set nameExtension = '' %}
+            {% for option in orderItem.product.options %}
+                {% if loop.first %}
+                    {% set nameExtension = nameExtension ~ ' - ' %}
+                {% endif %}
+                {% set nameExtension = nameExtension ~ option.translated.name %}
+                {% if loop.last == false %}
+                    {% set nameExtension = nameExtension ~ ', ' %}
+                {% endif %}
+            {% endfor %}
+
+            {{ nameExtension }}
+        </td>
+        <td>
+            {{ orderItem.product.manufacturer.translated.name }}
         </td>
         <td>
             {{ orderItem.quantity }}
@@ -22,7 +37,7 @@
                 {{ order.amountTotal|currency }}
             </td>
         {% endif %}
-        {% if loop.last == False %}
+        {% if loop.last == false %}
             </tr>
         {% endif %}
     {% endfor %}

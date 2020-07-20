@@ -9,7 +9,8 @@
             "name": "Name",
             "order": "Order",
             "count": "Count",
-            "price": "Price"
+            "price": "Price",
+            "manufacturer": "Manufacturer"
         },
         "summary": {
             "count": "Count",
