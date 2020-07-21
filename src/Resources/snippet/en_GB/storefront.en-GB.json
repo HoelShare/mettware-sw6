@@ -18,7 +18,8 @@
             "total": "Total"
         },
         "order": {
-            "overview": "Order Overview"
+            "overview": "Order Overview",
+            "extra": "Extra"
         }
     },
     "checkout": {

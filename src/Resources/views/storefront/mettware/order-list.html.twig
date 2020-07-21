@@ -35,9 +35,14 @@
             </div>
             <ul class="list-group list-group-flush">
                 {% for countAggregate in orders.aggregations.get('count').buckets %}
-                    <li class="list-group-item">
-                        {{ 'mettware.summary.count'|trans }}: {{ countAggregate.result.sum }}x {{ countAggregate.extensions.name.name }}
-                    </li>
+                    {% for extraAggregate in countAggregate.result.buckets %}
+                        <li class="list-group-item">
+                            {{ 'mettware.summary.count'|trans }}: {{ extraAggregate.result.sum }}x {{ countAggregate.extensions.name.name }}
+                            {% if extraAggregate.key %}
+                              - <b>{{ extraAggregate.key }}</b>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
                 {% endfor %}
             </ul>
             <div class="card-footer text-muted">

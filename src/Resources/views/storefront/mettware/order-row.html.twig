@@ -22,6 +22,10 @@
             {% endfor %}
 
             {{ nameExtension }}
+            {% if orderItem.payload.extra %}
+                <br/>
+                <i>{{ orderItem.payload.extra }}</i>
+            {% endif %}
         </td>
         <td>
             {{ orderItem.product.manufacturer.translated.name }}
@@ -31,6 +35,9 @@
         </td>
         <td>
             {{ orderItem.totalPrice|currency }}
+            {% if orderItem.payload.extra %}
+                <i>+ X</i>
+            {% endif %}
         </td>
         {% if loop.first %}
             <td rowspan="{{ order.lineItems|length }}">

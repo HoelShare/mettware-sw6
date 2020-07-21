@@ -37,5 +37,11 @@
             <argument type="service" id="Mettware\Core\OrderService"/>
             <tag name="shopware.cart.validator"/>
         </service>
+
+        <service id="Mettware\Core\LineItemAddedSubscriber">
+            <argument type="service" id="request_stack"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
     </services>
 </container>

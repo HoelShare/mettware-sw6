@@ -1,0 +1,13 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/buy-widget-form.html.twig' %}
+
+{% block page_product_detail_buy_button_container %}
+    <div class="col-1"></div>
+    <div class="col-8">
+        <input class="mt-1 mb-1 form-control"
+               type="text"
+               placeholder="{{ 'mettware.order.extra'|trans }}"
+               name="lineItems[{{ product.id }}][extra]"
+               value="">
+    </div>
+    {{ parent() }}
+{% endblock %}

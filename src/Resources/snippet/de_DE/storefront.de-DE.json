@@ -18,7 +18,8 @@
             "total": "Gesamtsumme"
         },
         "order": {
-            "overview": "Bestellübersicht"
+            "overview": "Bestellübersicht",
+            "extra": "Sonderwunsch"
         }
     },
     "checkout": {

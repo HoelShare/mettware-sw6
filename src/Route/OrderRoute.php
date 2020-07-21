@@ -89,7 +89,22 @@ class OrderRoute
         $criteria->addAssociation('lineItems.product.options');
         $criteria->addAssociation('customer');
 
-        $criteria->addAggregation(new TermsAggregation('count', 'order.lineItems.product.id', null, new FieldSorting('order.lineItems.product.name'), new SumAggregation('quantity', 'order.lineItems.quantity')));
+        $criteria->addAggregation(
+            new TermsAggregation(
+                'count',
+                'order.lineItems.product.id',
+                null,
+                new FieldSorting('order.lineItems.product.name'),
+                new TermsAggregation(
+                    'extra',
+                    'order.lineItems.payload.extra',
+                    null,
+                    null,
+                    new SumAggregation('quantity', 'order.lineItems.quantity')
+                )
+            )
+        );
+
         $criteria->addAggregation(new SumAggregation('sum', 'amountTotal'));
         $criteria->addAggregation(new SumAggregation('total-count', 'order.lineItems.quantity'));
 
