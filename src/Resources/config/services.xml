@@ -5,7 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="Mettware\Controller\OrderController" public="true">
-            <argument type="service" id="Mettware\Route\OrderRoute" />
+            <argument type="service" id="Mettware\Core\Route\OrderRoute" />
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -18,11 +18,15 @@
             </call>
         </service>
 
-        <service id="Mettware\Route\OrderRoute" public="true">
-            <argument type="service" id="order.repository"/>
+        <service id="Mettware\Core\Route\OrderRoute" public="true">
             <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Search\RequestCriteriaBuilder"/>
             <argument type="service" id="Shopware\Core\Checkout\Order\OrderDefinition"/>
             <argument type="service" id="Mettware\Core\OrderService"/>
+            <argument type="service" id="Mettware\Core\OrderListLoader"/>
+        </service>
+
+        <service id="Mettware\Core\OrderListLoader">
+            <argument type="service" id="order.repository"/>
         </service>
 
         <service id="Mettware\Core\Order\MettwareOrderDefinition">
@@ -33,15 +37,21 @@
             <argument type="service" id="mw_order.repository"/>
         </service>
 
+        <service id="Mettware\Core\OrderLineItemDefinitionExtension" public="true">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
         <service id="Mettware\Core\CartValidator">
             <argument type="service" id="Mettware\Core\OrderService"/>
             <tag name="shopware.cart.validator"/>
         </service>
 
-        <service id="Mettware\Core\LineItemAddedSubscriber">
-            <argument type="service" id="request_stack"/>
+        <service id="Mettware\Twig\ProductSortExtension">
+            <tag name="twig.runtime"/>
+        </service>
 
-            <tag name="kernel.event_subscriber"/>
+        <service id="Mettware\Twig\TwigExtension">
+            <tag name="twig.extension"/>
         </service>
     </services>
 </container>

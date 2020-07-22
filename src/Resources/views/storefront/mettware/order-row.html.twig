@@ -1,15 +1,28 @@
 <tr>
-    <th scope="row" rowspan="{{ order.lineItems|length }}">{{ number }}</th>
-    <th scope="row" rowspan="{{ order.lineItems|length }}">{{ order.orderNumber }}</th>
-    <td rowspan="{{ order.lineItems|length }}">
+    {% set items = order.lineItems.elements
+        |productSort
+        |filter(item => item.type != 'customized-products') %}
+    <th scope="row" rowspan="{{ items|length }}">{{ number }}</th>
+    <th scope="row" rowspan="{{ items|length }}">{{ order.orderNumber }}</th>
+    <td rowspan="{{ items|length }}">
         {{ order.orderCustomer.firstName }} {{ order.orderCustomer.lastName }}
     </td>
-    {% for id, orderItem in order.lineItems %}
+    {% for id, orderItem in items %}
         {% if loop.first == false %}
             <tr>
         {% endif %}
         <td>
-            {{ orderItem.product.translated.name }}
+            {% set name = orderItem.product.translated.name %}
+            {% if orderItem.type == 'customized-products-option' %}
+                {% set name = 'mettware.list.withExtra'|trans ~ ' ' ~ orderItem.label %}
+                {% if orderItem.payload.type == 'textfield' %}
+                    {% set name = orderItem.payload.value %}
+                {% endif %}
+            {% elseif orderItem.type == 'promotion' %}
+                {% set name = orderItem.label %}
+            {% endif %}
+
+            {{ name }}
             {% set nameExtension = '' %}
             {% for option in orderItem.product.options %}
                 {% if loop.first %}
@@ -22,10 +35,6 @@
             {% endfor %}
 
             {{ nameExtension }}
-            {% if orderItem.payload.extra %}
-                <br/>
-                <i>{{ orderItem.payload.extra }}</i>
-            {% endif %}
         </td>
         <td>
             {{ orderItem.product.manufacturer.translated.name }}
@@ -35,12 +44,9 @@
         </td>
         <td>
             {{ orderItem.totalPrice|currency }}
-            {% if orderItem.payload.extra %}
-                <i>+ X</i>
-            {% endif %}
         </td>
         {% if loop.first %}
-            <td rowspan="{{ order.lineItems|length }}">
+            <td rowspan="{{ items|length }}">
                 {{ order.amountTotal|currency }}
             </td>
         {% endif %}

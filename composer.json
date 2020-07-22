@@ -26,5 +26,8 @@
             "de-DE": "https://hoelshare.com",
             "en-GB": "https://hoelshare.com"
         }
+    },
+    "suggest": {
+        "swag/customized-products": ">=2.3"
     }
 }

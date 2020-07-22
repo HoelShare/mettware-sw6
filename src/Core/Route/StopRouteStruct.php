@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Mettware\Route;
+namespace Mettware\Core\Route;
 
 use Shopware\Core\Framework\Struct\Struct;
 

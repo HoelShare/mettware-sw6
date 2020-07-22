@@ -10,7 +10,8 @@
             "order": "Bestellung",
             "count": "Anzahl",
             "price": "Preis",
-            "manufacturer": "Hersteller"
+            "manufacturer": "Hersteller",
+            "withExtra": "+"
         },
         "summary": {
             "count": "Anzahl",

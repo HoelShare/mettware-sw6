@@ -10,7 +10,8 @@
             "order": "Order",
             "count": "Count",
             "price": "Price",
-            "manufacturer": "Manufacturer"
+            "manufacturer": "Manufacturer",
+            "withExtra": "+"
         },
         "summary": {
             "count": "Count",
