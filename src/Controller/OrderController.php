@@ -2,7 +2,7 @@
 
 namespace Mettware\Controller;
 
-use Mettware\Route\OrderRoute;
+use Mettware\Core\Route\OrderRoute;
 use Shopware\Core\Framework\Routing\Annotation\RouteScope;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Storefront\Controller\StorefrontController;
