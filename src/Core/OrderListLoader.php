@@ -2,7 +2,7 @@
 
 namespace Mettware\Core;
 
-use Mettware\Route\ProductNameStruct;
+use Mettware\Core\Route\ProductNameStruct;
 use Shopware\Core\Checkout\Order\Aggregate\OrderLineItem\OrderLineItemEntity;
 use Shopware\Core\Checkout\Order\OrderCollection;
 use Shopware\Core\Content\Product\ProductEntity;
