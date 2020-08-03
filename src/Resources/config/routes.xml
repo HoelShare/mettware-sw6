@@ -5,5 +5,5 @@
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <import resource="../../Controller" type="annotation" />
-    <import resource="../../Route/*Route.php" type="annotation" />
+    <import resource="../../Core/Route/*Route.php" type="annotation" />
 </routes>
