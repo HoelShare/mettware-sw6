@@ -35,6 +35,8 @@
 
         <service id="Mettware\Core\OrderService">
             <argument type="service" id="mw_order.repository"/>
+            <argument type="service" id="messenger.bus.shopware" />
+            <argument type="service" id="Mettware\Core\OrderListLoader" />
         </service>
 
         <service id="Mettware\Core\OrderLineItemDefinitionExtension" public="true">

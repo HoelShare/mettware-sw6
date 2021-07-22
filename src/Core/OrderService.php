@@ -3,23 +3,29 @@
 namespace Mettware\Core;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Mettware\Route\StopRouteResponse;
+use Mettware\Message\StopOrdersMessage;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\RangeFilter;
 use Shopware\Core\Framework\Uuid\Uuid;
+use Shopware\Core\System\SalesChannel\SalesChannelContext;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class OrderService
 {
-    /**
-     * @var EntityRepositoryInterface
-     */
-    private $mettwareOrderRepository;
+    private EntityRepositoryInterface $mettwareOrderRepository;
+    private MessageBusInterface $messageBus;
+    private OrderListLoader $orderListLoader;
 
-    public function __construct(EntityRepositoryInterface $mettwareOrderRepository)
-    {
+    public function __construct(
+        EntityRepositoryInterface $mettwareOrderRepository,
+        MessageBusInterface $messageBus,
+        OrderListLoader $orderListLoader
+    ) {
         $this->mettwareOrderRepository = $mettwareOrderRepository;
+        $this->messageBus = $messageBus;
+        $this->orderListLoader = $orderListLoader;
     }
 
     public function isStopped(Context $context): bool
@@ -27,13 +33,15 @@ class OrderService
         return (bool) $this->getTodayOrderId($context);
     }
 
-    public function stopOrders(Context $context): bool
+    public function stopOrders(SalesChannelContext $context): bool
     {
         try {
-            $this->mettwareOrderRepository->create([['id' => Uuid::randomHex()]], $context);
+            $this->mettwareOrderRepository->create([['id' => Uuid::randomHex()]], $context->getContext());
         } catch (UniqueConstraintViolationException $constraintViolationException) {
             return false;
         }
+
+        $this->sendStopOrdersMessage($context);
 
         return true;
     }
@@ -61,5 +69,12 @@ class OrderService
         ]));
 
         return $this->mettwareOrderRepository->searchIds($criteria, $context)->firstId();
+    }
+
+    private function sendStopOrdersMessage(SalesChannelContext $context): void
+    {
+        $orders = $this->orderListLoader->load(new Criteria(), $context);
+
+        $this->messageBus->dispatch(new StopOrdersMessage('', $orders));
     }
 }

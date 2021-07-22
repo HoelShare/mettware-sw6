@@ -28,6 +28,7 @@
         }
     },
     "suggest": {
-        "swag/customized-products": ">=2.3"
+        "swag/customized-products": ">=2.3",
+        "hoelshare/mettware-slack": "^0.1"
     }
 }

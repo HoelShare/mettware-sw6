@@ -74,7 +74,7 @@ class OrderRoute
      */
     public function stopOrders(SalesChannelContext $salesChannelContext): StopRouteResponse
     {
-        $success = $this->orderService->stopOrders($salesChannelContext->getContext());
+        $success = $this->orderService->stopOrders($salesChannelContext);
 
         return new StopRouteResponse($success);
     }
