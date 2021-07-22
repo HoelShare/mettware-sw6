@@ -14,7 +14,7 @@ class Migration1594766980MettwareOrder extends MigrationStep
 
     public function update(Connection $connection): void
     {
-        $connection->executeQuery('CREATE TABLE mw_order (
+        $connection->executeUpdate('CREATE TABLE IF NOT EXISTS mw_order (
             `id` BINARY(16) NOT NULL PRIMARY KEY,
             `order_stop_date` DATETIME(3) NOT NULL,
             `created_at` DATETIME(3) NOT NULL,

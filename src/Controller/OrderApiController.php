@@ -25,7 +25,7 @@ class OrderApiController extends AbstractController
     }
 
     /**
-     * @Route("/api/v{version}/_action/mettware/free", name="api.action.mettware.free", methods={"POST"})
+     * @Route("/api/_action/mettware/free", name="api.action.mettware.free", methods={"POST"})
      */
     public function freeOrders(Context $context): JsonResponse
     {
