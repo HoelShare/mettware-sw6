@@ -59,5 +59,12 @@
 
             <tag name="shopware.cms.data_resolver" />
         </service>
+
+        <service id="Mettware\Core\OrderSubscriber">
+            <argument>%shopware.http.cache.enabled%"</argument>
+            <argument id="Shopware\Core\Framework\Adapter\Cache\CacheClearer" type="service" />
+
+            <tag name="kernel.event_subscriber" />
+        </service>
     </services>
 </container>
