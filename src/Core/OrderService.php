@@ -66,7 +66,8 @@ class OrderService
 
     private function sendStopOrdersMessage(SalesChannelContext $context): void
     {
-        $orders = $this->orderListLoader->load(new Criteria(), $context->getContext());
+        $criteria = $this->orderListLoader->buildCriteria();
+        $orders = $this->orderListLoader->load($criteria, $context->getContext());
 
         $this->messageBus->dispatch(new StopOrdersMessage('', $orders));
     }

@@ -2,12 +2,9 @@
 
 namespace Mettware\Core;
 
-use Shopware\Core\Checkout\Cart\CartEvents;
-use Shopware\Core\Checkout\Cart\Event\CheckoutOrderPlacedEvent;
 use Shopware\Core\Checkout\Order\OrderEvents;
 use Shopware\Core\Framework\Adapter\Cache\CacheClearer;
 use Shopware\Core\Framework\DataAbstractionLayer\Event\EntityWrittenEvent;
-use Shopware\Storefront\Framework\Cache\CacheStore;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class OrderSubscriber implements EventSubscriberInterface
@@ -25,6 +22,7 @@ class OrderSubscriber implements EventSubscriberInterface
     {
         return [
             OrderEvents::ORDER_WRITTEN_EVENT => 'invalidateHttpCache',
+            'mw_order.written' => 'invalidateHttpCache',
         ];
     }
 
