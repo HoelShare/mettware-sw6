@@ -1,0 +1,79 @@
+{% block mettware_cms_element_order_overview %}
+    <div class="mettware-cms-el-order-overview">
+        <table v-if="showDetails">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">{{ $tc('mettware-plugin.cms.orderOverview.list.orderNumber') }}</th>
+                <th scope="col">{{ $tc('mettware-plugin.cms.orderOverview.list.name') }}</th>
+                <th scope="col">{{ $tc('mettware-plugin.cms.orderOverview.list.order') }}</th>
+                <th scope="col">{{ $tc('mettware-plugin.cms.orderOverview.list.manufacturer') }}</th>
+                <th scope="col">{{ $tc('mettware-plugin.cms.orderOverview.list.count') }}</th>
+                <th scope="col" colspan="2">{{ $tc('mettware-plugin.cms.orderOverview.list.price') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <th scope="row">10001</th>
+                <td>Sebastian Hölscher</td>
+                <td>Mett Bun - With Onions</td>
+                <td>Butcher Of Trust</td>
+                <td>2</td>
+                <td>3€</td>
+                <td>3€</td>
+            </tr>
+            <tr>
+                <th scope="row" rowspan="2">2</th>
+                <th scope="row" rowspan="2">10002</th>
+                <td rowspan="2">Sebastian Hölscher</td>
+                <td>Mett Bun - With Onions</td>
+                <td>Butcher Of Trust</td>
+                <td>1</td>
+                <td>1.5€</td>
+                <td rowspan="2">3€</td>
+            </tr>
+            <tr>
+                <td>Mett Bun - Without Onions</td>
+                <td>Butcher Of Trust</td>
+                <td>1</td>
+                <td>1.5€</td>
+            </tr>
+            </tr>
+            </tbody>
+        </table>
+
+        <div v-if="showSummary">
+            <div
+                class="">{{ $tc('mettware-plugin.cms.orderOverview.summary.title') }}</div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    Count: 2x Mett Bun - With Onions
+                </li>
+                <li class="list-group-item">
+                    Count: 1x Mett Bun - Without Onions
+                </li>
+            </ul>
+            <div class="card-footer text-muted">
+                <div class="row">
+                    <div class="col-9">
+                        <div>
+                            {{ $tc('mettware-plugin.cms.orderOverview.summary.totalCount') }}
+                            : 3
+                        </div>
+                        <div>
+                            {{ $tc('mettware-plugin.cms.orderOverview.summary.totalPrice') }}
+                            : €4.5
+                        </div>
+                    </div>
+                    <div class="col-3 message-wrapper">
+                        <button type="button"
+                                class="btn btn-danger">
+                            {{ $tc('mettware-plugin.cms.orderOverview.summary.stopButton') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

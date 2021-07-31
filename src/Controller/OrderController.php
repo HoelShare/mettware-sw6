@@ -26,22 +26,6 @@ class OrderController extends StorefrontController
     }
 
     /**
-     * @Route(path="/mw-order", name="frontend.mettware.order", methods={"GET"})
-     */
-    public function getOrders(Request $request, SalesChannelContext $salesChannelContext)
-    {
-        $orderResponse = $this->orderRoute->load($request, $salesChannelContext);
-
-        return $this->renderStorefront('@Mettware/storefront/mettware/order-list.html.twig',
-            [
-                'orders' => $orderResponse->getObject(),
-                'date' => (new \DateTime())->setTimezone(new \DateTimeZone('UTC')),
-                'isStopped' => $orderResponse->isStopped(),
-            ]
-        );
-    }
-
-    /**
      * @Route(path="/mw-order", name="frontend.mettware.stop-order", methods={"POST"}, defaults={"XmlHttpRequest"=true})
      */
     public function stopOrders(SalesChannelContext $salesChannelContext)

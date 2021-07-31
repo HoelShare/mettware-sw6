@@ -5,6 +5,25 @@
             "openOrders": "Open Orders",
             "ordersOpened": "Orders successfully opened",
             "error": "Ups, an error occurred"
+        },
+        "cms": {
+            "orderOverview": {
+                "label": "Order Overview",
+                "list": {
+                    "orderNumber": "Order Number",
+                    "name": "Name",
+                    "order": "Order",
+                    "manufacturer": "Manufacturer",
+                    "count": "Count",
+                    "price": "Price"
+                },
+                "summary": {
+                    "title": "Summary",
+                    "totalCount": "Total Count",
+                    "totalPrice": "Total",
+                    "stopButton": "Stop Orders"
+                }
+            }
         }
     }
 }

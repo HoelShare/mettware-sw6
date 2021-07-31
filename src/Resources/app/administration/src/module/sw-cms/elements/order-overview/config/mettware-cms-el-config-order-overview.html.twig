@@ -1,0 +1,17 @@
+{% block mettware_cms_element_order_overview_config %}
+    <div>
+        <sw-switch-field
+            class="mettware-order-overview-show-details"
+            :label="$tc('mettware-plugin.cms.orderOverview.showDetails')"
+            v-model="element.config.showDetails.value"
+            @element-update="onElementUpdate">
+        </sw-switch-field>
+
+        <sw-switch-field
+            class="mettware-order-overview-show-summary"
+            :label="$tc('mettware-plugin.cms.orderOverview.showSummary')"
+            v-model="element.config.showSummary.value"
+            @element-update="onElementUpdate">
+        </sw-switch-field>
+    </div>
+{% endblock %}

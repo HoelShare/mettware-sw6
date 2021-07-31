@@ -1,0 +1,19 @@
+.mettware-cms-el-preview-order-overview {
+    position: relative;
+
+    .mettware-cms-el-preview-order-overview-img {
+        display: block;
+        max-width: 100%;
+    }
+
+    .mettware-cms-el-preview-order-overview-icon {
+        $icon-height: 50px;
+        $icon-width: $icon-height;
+        position: absolute;
+        height: $icon-height;
+        width: $icon-width;
+
+        left: calc(50% - #{$icon-width/2});
+        top: calc(50% - #{$icon-height/2});
+    }
+}
