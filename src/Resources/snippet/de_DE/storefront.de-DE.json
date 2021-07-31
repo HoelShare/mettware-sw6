@@ -13,6 +13,15 @@
             "manufacturer": "Hersteller",
             "withExtra": "+"
         },
+        "statistics": {
+            "customerNumber": "Kundennummer",
+            "name": "Name",
+            "count": "Anzahl",
+            "meat": "Fleisch (in Gramm)",
+            "overview": "Zusammenfassung",
+            "totalCount": "Anzahl Fleisch Bestellungen",
+            "totalMeatInKg": "Gesamt Gewicht (in KG)"
+        },
         "summary": {
             "count": "Anzahl",
             "totalCount": "Gesamtanzahl",

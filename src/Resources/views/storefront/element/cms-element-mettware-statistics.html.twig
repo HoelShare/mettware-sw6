@@ -1,0 +1,61 @@
+{% block element_mettware_order_overview %}
+    <div>
+        <table class="table table-hover table-responsive-md border-primary">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">{{ 'mettware.statistics.customerNumber'|trans }}</th>
+                <th scope="col">{{ 'mettware.statistics.name'|trans }}</th>
+                <th scope="col">{{ 'mettware.statistics.count'|trans }}</th>
+                <th scope="col">{{ 'mettware.statistics.meat'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set statisticsData = element.data %}
+            {% for customerStatistics in statisticsData %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <th scope="row">{{ customerStatistics.customerNumber }}</th>
+                    <td>
+                        {{ customerStatistics.firstName }} {{ customerStatistics.lastName }}
+                    </td>
+                    <td>{{ customerStatistics.count }}</td>
+                    <td>{{ customerStatistics.meatContent }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="card mt-4 border-primary">
+            <div class="card-header text-center bg-primary">
+                {{ 'mettware.statistics.overview'|trans }}
+            </div>
+            <div class="card-footer text-muted">
+                <div class="row">
+                    <div class="col-9">
+                        <div>
+                            {{ 'mettware.statistics.totalCount'|trans }}
+                            : {{ statisticsData.totalCount }}
+                        </div>
+                        <div>
+                            {{ 'mettware.statistics.totalMeatInKg'|trans }}
+                            : {{ statisticsData.totalMeatContent / 1000 }}
+                        </div>
+                        <div class="row">
+                            {% for i in 1..statisticsData.pigCount %}
+                                {% set imageStyle = '' %}
+                                {% if loop.last %}
+                                    {% set imageStyle = 'mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1)' ~ statisticsData.shareOfCurrentPig ~ '%, rgba(0,0,0,0) ' ~ (statisticsData.shareOfCurrentPig +1) ~ '%, rgba(0,0,0,0) 100%);
+ -webkit-mask-image:-webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ' ~ statisticsData.shareOfCurrentPig ~ '%, rgba(0,0,0,0) ' ~ (statisticsData.shareOfCurrentPig +1) ~ '%, rgba(0,0,0,0) 100%);' %}
+                                {% endif %}
+                                <div class="col-sm-3 col-lg-2 relative">
+                                    <img src="{{ asset('bundles/mettware/piggy.svg', 'asset') }}"
+                                         style="{{ imageStyle }}"/>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

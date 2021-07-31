@@ -13,6 +13,15 @@
             "manufacturer": "Manufacturer",
             "withExtra": "+"
         },
+        "statistics": {
+            "customerNumber": "Customer Number",
+            "name": "Name",
+            "count": "Count",
+            "meat": "Meat (in Gramm)",
+            "overview": "Summary",
+            "totalCount": "Count Meat Orders",
+            "totalMeatInKg": "Total meat (in KG)"
+        },
         "summary": {
             "count": "Count",
             "totalCount": "Total count",

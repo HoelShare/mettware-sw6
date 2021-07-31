@@ -9,6 +9,8 @@
         "cms": {
             "orderOverview": {
                 "label": "Order Overview",
+                "showDetails": "Show Details",
+                "showSummary": "Show Summary",
                 "list": {
                     "orderNumber": "Order Number",
                     "name": "Name",
@@ -22,6 +24,15 @@
                     "totalCount": "Total Count",
                     "totalPrice": "Total",
                     "stopButton": "Stop Orders"
+                }
+            },
+            "statistics": {
+                "label": "Order Statistics",
+                "list": {
+                    "customerNumber": "Customer Number",
+                    "name": "Name",
+                    "count": "Count",
+                    "meat": "Meat (in Gramm)"
                 }
             }
         }

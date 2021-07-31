@@ -66,5 +66,15 @@
 
             <tag name="kernel.event_subscriber" />
         </service>
+
+        <service id="Mettware\Core\Statistics\StatisticsLoader">
+        </service>
+
+        <service id="Mettware\Core\DataResolver\StatisticsCmsElementResolver">
+            <argument id="Mettware\Core\Statistics\StatisticsLoader" type="service" />
+            <argument id="Shopware\Core\System\SystemConfig\SystemConfigService" type="service" />
+
+            <tag name="shopware.cms.data_resolver" />
+        </service>
     </services>
 </container>

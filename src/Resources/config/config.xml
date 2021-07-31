@@ -5,7 +5,11 @@
         <title>Mettware</title>
         <component name="mettware-plugin-detail">
             <name>orderButton</name>
-            <label>Mettware Bestellungen wieder frei geben</label>
+            <label>Free Orders</label>
         </component>
+        <input-field>
+            <name>pigContent</name>
+            <label>Pig Weight</label>
+        </input-field>
     </card>
 </config>

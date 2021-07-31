@@ -6,9 +6,3 @@ It also adds a "Stop Orders" Button. When this button is pressed, no more orders
 (Orders can be freed in the administration)
 When the orders are stopped an event will be dispatched "StopOrdersMessage" 
 (perfect for the [MettwareSlack Plugin](https://github.com/HoelShare/mettware-slack))
-
-## Ideas
-### Statistics
-- CMS Element
-- Show Total Order
-- Ranking
