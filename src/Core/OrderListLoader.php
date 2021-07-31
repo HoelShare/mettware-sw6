@@ -6,6 +6,7 @@ use Mettware\Core\Route\ProductNameStruct;
 use Shopware\Core\Checkout\Order\Aggregate\OrderLineItem\OrderLineItemEntity;
 use Shopware\Core\Checkout\Order\OrderCollection;
 use Shopware\Core\Content\Product\ProductEntity;
+use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Aggregation\Bucket\FilterAggregation;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Aggregation\Bucket\TermsAggregation;
@@ -32,8 +33,9 @@ class OrderListLoader
         $this->orderRepository = $orderRepository;
     }
 
-    public function load(Criteria $criteria, SalesChannelContext $salesChannelContext): EntitySearchResult
+    public function buildCriteria(): Criteria
     {
+        $criteria = new Criteria();
         $startOfDay = (new \DateTime())->setTimezone(new \DateTimeZone('UTC'))->setTime(0, 0);
         $endOfDay = (new \DateTime())->setTimezone(new \DateTimeZone('UTC'))->setTime(0, 0)->add(new \DateInterval('P1D'));
 
@@ -48,15 +50,24 @@ class OrderListLoader
         $criteria->addSorting(new FieldSorting('orderNumber'));
         $criteria->addSorting(new FieldSorting('lineItems.type', FieldSorting::ASCENDING));
 
-        $orders = $this->orderRepository->search($criteria, $salesChannelContext->getContext());
+        return $criteria;
+    }
 
+    public function load(Criteria $criteria, Context $context): EntitySearchResult
+    {
+        $orders = $this->orderRepository->search($criteria, $context);
+
+        return $this->enhanceOrders($orders);
+    }
+
+    public function enhanceOrders(EntitySearchResult $orders): EntitySearchResult
+    {
         /** @var TermsResult $terms */
         $this->addNameExtensions($orders->getAggregations()->get('count'), $orders);
         $this->addNameExtensions($orders->getAggregations()->get('custom-count'), $orders);
 
         return $orders;
     }
-
 
     private function findProductNameById(OrderCollection $orders, string $productId): ?string
     {

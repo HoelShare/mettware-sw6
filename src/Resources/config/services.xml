@@ -19,10 +19,7 @@
         </service>
 
         <service id="Mettware\Core\Route\OrderRoute" public="true">
-            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Search\RequestCriteriaBuilder"/>
-            <argument type="service" id="Shopware\Core\Checkout\Order\OrderDefinition"/>
             <argument type="service" id="Mettware\Core\OrderService"/>
-            <argument type="service" id="Mettware\Core\OrderListLoader"/>
         </service>
 
         <service id="Mettware\Core\OrderListLoader">
@@ -57,6 +54,9 @@
         </service>
 
         <service id="Mettware\Core\DataResolver\OrderOverviewCmsElementResolver">
+            <argument id="Mettware\Core\OrderListLoader" type="service" />
+            <argument id="Mettware\Core\OrderService" type="service" />
+
             <tag name="shopware.cms.data_resolver" />
         </service>
     </services>

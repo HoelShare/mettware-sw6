@@ -59,22 +59,32 @@ class OrderService
 
     private function getTodayOrderId(Context $context): ?string
     {
-        $criteria = new Criteria();
-        $startOfDay = (new \DateTime())->setTimezone(new \DateTimeZone('UTC'))->setTime(0, 0);
-        $endOfDay = (new \DateTime())->setTimezone(new \DateTimeZone('UTC'))->setTime(0, 0)->add(new \DateInterval('P1D'));
-
-        $criteria->addFilter(new RangeFilter('stopDate', [
-            RangeFilter::GTE => $startOfDay->format('Y-m-d H:i:s'),
-            RangeFilter::LTE => $endOfDay->format('Y-m-d H:i:s'),
-        ]));
+        $criteria = $this->buildStopOrderCriteria();
 
         return $this->mettwareOrderRepository->searchIds($criteria, $context)->firstId();
     }
 
     private function sendStopOrdersMessage(SalesChannelContext $context): void
     {
-        $orders = $this->orderListLoader->load(new Criteria(), $context);
+        $orders = $this->orderListLoader->load(new Criteria(), $context->getContext());
 
         $this->messageBus->dispatch(new StopOrdersMessage('', $orders));
+    }
+
+    public function buildStopOrderCriteria(): Criteria
+    {
+        $criteria = new Criteria();
+        $startOfDay = (new \DateTime())->setTimezone(new \DateTimeZone('UTC'))->setTime(0, 0);
+        $endOfDay = (new \DateTime())->setTimezone(new \DateTimeZone('UTC'))->setTime(0, 0)->add(
+            new \DateInterval('P1D')
+        );
+
+        $criteria->addFilter(
+            new RangeFilter('stopDate', [
+                RangeFilter::GTE => $startOfDay->format('Y-m-d H:i:s'),
+                RangeFilter::LTE => $endOfDay->format('Y-m-d H:i:s'),
+            ])
+        );
+        return $criteria;
     }
 }

@@ -18,55 +18,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class OrderRoute
 {
     /**
-     * @var RequestCriteriaBuilder
-     */
-    private $requestCriteriaBuilder;
-
-    /**
-     * @var OrderDefinition
-     */
-    private $orderDefinition;
-
-    /**
      * @var OrderService
      */
     private $orderService;
 
-    /**
-     * @var OrderListLoader
-     */
-    private $orderListLoader;
-
     public function __construct(
-        RequestCriteriaBuilder $requestCriteriaBuilder,
-        OrderDefinition $orderDefinition,
-        OrderService $orderService,
-        OrderListLoader $orderListLoader
+        OrderService $orderService
     ) {
-        $this->requestCriteriaBuilder = $requestCriteriaBuilder;
-        $this->orderDefinition = $orderDefinition;
         $this->orderService = $orderService;
-        $this->orderListLoader = $orderListLoader;
-    }
-
-    /**
-     * @Route(path="/store-api/v{version}/mw-order", name="store-api.mettware.order", methods={"GET"})
-     */
-    public function load(Request $request, SalesChannelContext $context): OrderRouteResponse
-    {
-        $criteria = new Criteria();
-        $criteria = $this->requestCriteriaBuilder->handleRequest(
-            $request,
-            $criteria,
-            $this->orderDefinition,
-            $context->getContext()
-        );
-
-        $orders = $this->orderListLoader->load($criteria, $context);
-
-        $isStopped = $this->orderService->isStopped($context->getContext());
-
-        return new OrderRouteResponse($orders, $isStopped);
     }
 
     /**
