@@ -55,5 +55,9 @@
         <service id="Mettware\Twig\TwigExtension">
             <tag name="twig.extension"/>
         </service>
+
+        <service id="Mettware\Core\DataResolver\OrderOverviewCmsElementResolver">
+            <tag name="shopware.cms.data_resolver" />
+        </service>
     </services>
 </container>

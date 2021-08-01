@@ -1,10 +1,29 @@
 {
     "mettware-plugin": {
-        "detail":{
+        "detail": {
             "title": "Mettware",
             "openOrders": "Bestellungen freigeben",
             "ordersOpened": "Bestellungen wurden erfolgreich freigegeben!",
             "error": "Es ist ein Fehler aufgetreten!"
+        },
+        "cms": {
+            "orderOverview": {
+                "label": "Bestell Übersicht",
+                "list": {
+                    "orderNumber": "Bestellnummer",
+                    "name": "Name",
+                    "manufacturer": "Hersteller",
+                    "order": "Bestellung",
+                    "count": "Anzahl",
+                    "price": "Preis"
+                },
+                "summary": {
+                    "title": "Zusammenfassung",
+                    "totalCount": "Gesamtanzahl",
+                    "totalPrice": "Summe",
+                    "stopButton": "Stoppe Bestellungen"
+                }
+            }
         }
     }
 }

@@ -1,10 +1,14 @@
 README
 ---
-## TODO
-- Code cleanup!!
+# Features
+This plugin adds a public Order overview (CMSElement) with all orders of the current day.  
+It also adds a "Stop Orders" Button. When this button is pressed, no more orders can be placed on this day.
+(Orders can be freed in the administration)
+When the orders are stopped an event will be dispatched "StopOrdersMessage" 
+(perfect for the [MettwareSlack Plugin](https://github.com/HoelShare/mettware-slack))
 
-- Slack Notifications
-    - config in Account
-    - alert on stop orders
-    - alert on first order of day
-    - alert on your order
+## Ideas
+### Statistics
+- CMS Element
+- Show Total Order
+- Ranking
