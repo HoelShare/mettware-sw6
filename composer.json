@@ -2,7 +2,7 @@
     "name": "hoelshare/mettware",
     "description": "Mettware Plugin",
     "type": "shopware-platform-plugin",
-    "version": "v0.0.4",
+    "version": "v0.1.0",
     "license": "MIT",
     "authors": [
         {
